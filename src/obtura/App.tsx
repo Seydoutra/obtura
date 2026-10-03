@@ -16,7 +16,7 @@ function Brand() {
   return <span className="brand"><span className="brand-mark"><Aperture size={22} strokeWidth={1.7} /></span>obtura<span className="brand-dot">.</span></span>
 }
 
-function Platform() {
+export function Platform() {
   const [session, setSession] = useState<Session | null>(null)
   const [loading, setLoading] = useState(Boolean(client))
   const [studios, setStudios] = useState<Studio[]>([])
