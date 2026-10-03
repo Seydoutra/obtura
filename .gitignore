@@ -47,7 +47,9 @@ next-env.d.ts
 /work/
 
 # GRS reference material remains local, never part of an Obtura release.
-/public/
+!/public/
+/public/*
+!/public/obtura-images/
 /legacy/
 /src/*
 !/src/obtura/

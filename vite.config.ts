@@ -7,8 +7,8 @@ export default defineConfig(({ mode, command }) => {
   verifyObturaEnvironment(env, command === 'build')
   return {
     base: env.VITE_BASE_PATH || '/',
-    // The inherited GRS public folder is deliberately excluded from output.
-    publicDir: false,
+    // Publish only the curated photo portfolio, never the inherited GRS public assets.
+    publicDir: 'public/obtura-images',
     plugins: [react()],
     build: { target: 'es2022', sourcemap: false },
   }

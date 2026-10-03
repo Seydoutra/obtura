@@ -5,6 +5,7 @@ import { Landing } from './Landing'
 import { Demo } from './Demo'
 import './styles.css'
 import './landing.css'
+import './photo-experience.css'
 import './demo.css'
 
 function Root() {
