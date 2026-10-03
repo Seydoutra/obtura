@@ -6,6 +6,7 @@ import { Demo } from './Demo'
 import './styles.css'
 import './landing.css'
 import './photo-experience.css'
+import './face-discovery.css'
 import './demo.css'
 
 function Root() {

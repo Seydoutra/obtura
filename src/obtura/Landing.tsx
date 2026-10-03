@@ -1,6 +1,7 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { ActivityGallery, GalleryDelivery, PhotoHero } from './PhotoExperience'
+import { ActivityGallery, PhotoHero } from './PhotoExperience'
+import { GalleryDeliveryWithFaces as GalleryDelivery } from './FaceDiscovery'
 import {
   Aperture, ArrowDownRight, ArrowRight, ArrowUpRight, CalendarDays, Camera,
   Check, ChevronLeft, ChevronRight, CircleDollarSign, Grid2X2, Images,
