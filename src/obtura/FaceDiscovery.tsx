@@ -20,23 +20,23 @@ export function GalleryDeliveryWithFaces() {
     <GalleryDelivery />
     <section className="face-section" id="photos-pour-vous" aria-labelledby="face-title">
       <div className="face-section-copy">
-        <p className="eyebrow"><ScanFace size={16} /> UNE GALERIE QUI VOUS RETROUVE</p>
-        <h2 id="face-title">Vos photos.<br /><em>Dès le premier regard.</em></h2>
-        <p>Après réception du lien, le client pourra choisir de retrouver en priorité les photos où il apparaît. Toute la galerie reste accessible, sans imposer ce tri aux autres invités.</p>
+        <p className="eyebrow"><ScanFace size={16} /> RETROUVER SES PHOTOS</p>
+        <h2 id="face-title">Les photos de vous.<br /><em>En premier.</em></h2>
+        <p>Quand vous recevez le lien de votre galerie, vous pourrez choisir de voir d’abord les photos où vous êtes. Vous pourrez aussi regarder toutes les autres photos.</p>
         <div className="face-feature-list">
-          <span><Check size={17} /> Activable par le studio, galerie par galerie</span>
-          <span><Check size={17} /> Recherche lancée uniquement avec l’accord du client</span>
-          <span><Check size={17} /> Résultats prioritaires, jamais exclusifs</span>
+          <span><Check size={17} /> Le photographe choisit si cette option est proposée</span>
+          <span><Check size={17} /> Vous décidez si vous voulez l’utiliser</span>
+          <span><Check size={17} /> Toutes les photos restent visibles</span>
         </div>
-        <p className="face-disclaimer"><ShieldCheck size={17} /> Aperçu interactif : cette version ne collecte aucun visage et ne réalise pas encore de reconnaissance faciale.</p>
+        <p className="face-disclaimer"><ShieldCheck size={17} /> Cette fonction n’est pas encore disponible. Cette démo ne regarde pas votre visage et ne garde aucune photo de vous.</p>
       </div>
       <div className="face-experience" aria-label="Démonstration du parcours client">
         <div className="face-experience-top"><span><Sparkles size={15} /> obtura<span className="face-dot">.</span> / galerie privée</span><span>01 — 04</span></div>
-        <div className="face-experience-intro"><small>LIEN REÇU · ÉCLATS DE LUMIÈRE</small><h3>La galerie s’ouvre.<br />Votre histoire aussi.</h3><p>Découvrir toutes les images ou choisir une vue qui commence par vous.</p></div>
-        <div className="face-consent-card"><div className="face-consent-icon"><ScanFace size={27} /></div><div><strong>Retrouver mes photos</strong><p>Dans cette démo, le résultat est simulé avec des images d’exemple.</p></div><label className="face-checkbox"><input type="checkbox" checked={consent} onChange={event => { setConsent(event.target.checked); setPrioritized(false) }} /><span>J’accepte de tester cette simulation</span></label><button type="button" disabled={!consent} onClick={() => setPrioritized(true)}>{prioritized ? 'Vue personnalisée affichée' : 'Voir les photos en priorité'} <ArrowRight size={17} /></button></div>
-        <div className="face-results-heading"><div><small>{prioritized ? 'APERÇU PERSONNALISÉ · SIMULATION' : 'TOUTE LA GALERIE · APERÇU'}</small><strong>{prioritized ? 'Celles où vous apparaissez d’abord' : 'Toutes les histoires réunies'}</strong></div><span>{prioritized ? '03 / 04 en premier' : '04 images'}</span></div>
+        <div className="face-experience-intro"><small>LIEN REÇU · GALERIE D’EXEMPLE</small><h3>Vous ouvrez le lien.<br />Vous voyez les photos.</h3><p>Essayez ici les deux façons de regarder une galerie.</p></div>
+        <div className="face-consent-card"><div className="face-consent-icon"><ScanFace size={27} /></div><div><strong>Voir d’abord mes photos</strong><p>Ici, l’ordre des images change seulement pour montrer l’idée.</p></div><label className="face-checkbox"><input type="checkbox" checked={consent} onChange={event => { setConsent(event.target.checked); setPrioritized(false) }} /><span>Je veux essayer cette démo</span></label><button type="button" disabled={!consent} onClick={() => setPrioritized(true)}>{prioritized ? 'Mes photos sont en premier' : 'Mettre mes photos en premier'} <ArrowRight size={17} /></button></div>
+        <div className="face-results-heading"><div><small>{prioritized ? 'PHOTOS EN PREMIER · DÉMO' : 'TOUTES LES PHOTOS · DÉMO'}</small><strong>{prioritized ? 'Vos photos apparaissent d’abord' : 'Toutes les photos de la galerie'}</strong></div><span>{prioritized ? '03 / 04 en premier' : '04 images'}</span></div>
         <div className="face-results" aria-live="polite"><AnimatePresence mode="popLayout">{(prioritized ? [samplePhotos[1], samplePhotos[2], samplePhotos[3], samplePhotos[0]] : samplePhotos).map((item, index) => <motion.figure key={item.file} layout initial={reducedMotion ? false : { opacity: 0, scale: .94 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: .45 }}><img src={image(item.file)} alt={item.label} loading="lazy" /><figcaption>{prioritized && index < 3 ? 'EN PRIORITÉ · ' : ''}{item.label}</figcaption></motion.figure>)}</AnimatePresence></div>
-        {prioritized && <button className="face-reset" type="button" onClick={() => setPrioritized(false)}>Revoir l’ordre de toute la galerie</button>}
+        {prioritized && <button className="face-reset" type="button" onClick={() => setPrioritized(false)}>Revoir toutes les photos dans l’ordre normal</button>}
       </div>
     </section>
   </>
