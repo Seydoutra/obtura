@@ -24,7 +24,7 @@ export function GalleryDeliveryWithFaces() {
         <h2 id="face-title">Les photos de vous.<br /><em>En premier.</em></h2>
         <p>Quand vous recevez le lien de votre galerie, vous pourrez choisir de voir d’abord les photos où vous êtes. Vous pourrez aussi regarder toutes les autres photos.</p>
         <div className="face-feature-list">
-          <span><Check size={17} /> Le photographe choisit si cette option est proposée</span>
+          <span><Check size={17} /> Le créatif choisit si cette option est proposée</span>
           <span><Check size={17} /> Vous décidez si vous voulez l’utiliser</span>
           <span><Check size={17} /> Toutes les photos restent visibles</span>
         </div>
