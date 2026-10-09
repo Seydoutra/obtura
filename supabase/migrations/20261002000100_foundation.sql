@@ -21,7 +21,7 @@ create table public.organizations (
 create table public.memberships (
   organization_id uuid not null references public.organizations(id) on delete cascade,
   user_id uuid not null references auth.users(id) on delete cascade,
-  role text not null check (role in ('OWNER','ADMIN','MANAGER','PHOTOGRAPHER','VIEWER')),
+  role text not null check (role in ('OWNER','ADMIN','MANAGER','CREATIVE','VIEWER')),
   status text not null default 'ACTIVE' check (status in ('ACTIVE','INVITED','SUSPENDED')),
   created_at timestamptz not null default now(),
   primary key (organization_id, user_id)
@@ -38,6 +38,7 @@ returns boolean language sql stable security definer set search_path = '' as $$
   );
 $$;
 revoke all on function public.is_organization_member(uuid) from public;
+revoke all on function public.is_organization_member(uuid) from anon;
 grant execute on function public.is_organization_member(uuid) to authenticated;
 
 create or replace function public.has_organization_role(p_organization_id uuid, p_roles text[])
@@ -51,6 +52,7 @@ returns boolean language sql stable security definer set search_path = '' as $$
   );
 $$;
 revoke all on function public.has_organization_role(uuid, text[]) from public;
+revoke all on function public.has_organization_role(uuid, text[]) from anon;
 grant execute on function public.has_organization_role(uuid, text[]) to authenticated;
 
 create or replace function public.create_studio(p_name text)
@@ -75,6 +77,7 @@ begin
 end;
 $$;
 revoke all on function public.create_studio(text) from public;
+revoke all on function public.create_studio(text) from anon;
 grant execute on function public.create_studio(text) to authenticated;
 
 create or replace function public.create_profile_for_auth_user()
@@ -115,12 +118,12 @@ create policy obtura_private_member_select on storage.objects for select to auth
     and public.is_organization_member((split_part(name, '/', 1))::uuid));
 create policy obtura_private_member_insert on storage.objects for insert to authenticated
   with check (bucket_id = 'obtura-private'
-    and public.has_organization_role((split_part(name, '/', 1))::uuid, array['OWNER','ADMIN','MANAGER','PHOTOGRAPHER']));
+    and public.has_organization_role((split_part(name, '/', 1))::uuid, array['OWNER','ADMIN','MANAGER','CREATIVE']));
 create policy obtura_private_member_update on storage.objects for update to authenticated
   using (bucket_id = 'obtura-private'
-    and public.has_organization_role((split_part(name, '/', 1))::uuid, array['OWNER','ADMIN','MANAGER','PHOTOGRAPHER']))
+    and public.has_organization_role((split_part(name, '/', 1))::uuid, array['OWNER','ADMIN','MANAGER','CREATIVE']))
   with check (bucket_id = 'obtura-private'
-    and public.has_organization_role((split_part(name, '/', 1))::uuid, array['OWNER','ADMIN','MANAGER','PHOTOGRAPHER']));
+    and public.has_organization_role((split_part(name, '/', 1))::uuid, array['OWNER','ADMIN','MANAGER','CREATIVE']));
 create policy obtura_private_admin_delete on storage.objects for delete to authenticated
   using (bucket_id = 'obtura-private'
     and public.has_organization_role((split_part(name, '/', 1))::uuid, array['OWNER','ADMIN']));
